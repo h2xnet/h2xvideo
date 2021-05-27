@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1500
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "h2xvideo", "h2xvideo\h2xvideo.vcxproj", "{D5B94FB5-6BE2-4908-B980-6AF21CA1BEF9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "h2xbase", "h2xbase\h2xbase.vcxproj", "{808C4FF1-320D-411B-BF1E-02DFFA0FE552}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{0751684C-7913-46AD-A140-09F0A08D8F9C}"
+	ProjectSection(SolutionItems) = preProject
+		build\build_config.h = build\build_config.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "third_party", "third_party", "{593F8F8E-D1C2-4BA1-8E35-16E6677DF912}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "h2xcore", "h2xcore\h2xcore.vcxproj", "{5E1DEC1A-CB09-475A-AC03-F1C3DB89217A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{3B9EDE59-FE78-4FCA-A4F3-24042650217D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5B94FB5-6BE2-4908-B980-6AF21CA1BEF9}.Debug|x86.ActiveCfg = Debug|Win32
+		{D5B94FB5-6BE2-4908-B980-6AF21CA1BEF9}.Debug|x86.Build.0 = Debug|Win32
+		{D5B94FB5-6BE2-4908-B980-6AF21CA1BEF9}.Release|x86.ActiveCfg = Release|Win32
+		{D5B94FB5-6BE2-4908-B980-6AF21CA1BEF9}.Release|x86.Build.0 = Release|Win32
+		{808C4FF1-320D-411B-BF1E-02DFFA0FE552}.Debug|x86.ActiveCfg = Debug|Win32
+		{808C4FF1-320D-411B-BF1E-02DFFA0FE552}.Debug|x86.Build.0 = Debug|Win32
+		{808C4FF1-320D-411B-BF1E-02DFFA0FE552}.Release|x86.ActiveCfg = Release|Win32
+		{808C4FF1-320D-411B-BF1E-02DFFA0FE552}.Release|x86.Build.0 = Release|Win32
+		{5E1DEC1A-CB09-475A-AC03-F1C3DB89217A}.Debug|x86.ActiveCfg = Debug|Win32
+		{5E1DEC1A-CB09-475A-AC03-F1C3DB89217A}.Debug|x86.Build.0 = Debug|Win32
+		{5E1DEC1A-CB09-475A-AC03-F1C3DB89217A}.Release|x86.ActiveCfg = Release|Win32
+		{5E1DEC1A-CB09-475A-AC03-F1C3DB89217A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {191785DF-BDDB-476B-89E9-2BF4182CD42E}
+	EndGlobalSection
+EndGlobal
