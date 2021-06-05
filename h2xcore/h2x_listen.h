@@ -16,6 +16,16 @@ public:
     Listen();
     virtual ~Listen();
 
+    virtual bool open() = 0;
+
+    virtual void close() = 0;
+
+    virtual int send(const char* data, size_t size) = 0;
+
+    virtual int recv(unsigned char* buffer, size_t bufferSize) = 0;
+
+    virtual bool isOpen() = 0;
+
 };
 
 } // end namespace h2x

@@ -14,7 +14,7 @@ namespace h2x {
     */
     class H2XCORE_EXPORT CPUController : public Controller {
     public:
-        CPUController();
+        CPUController(Application* app, Context* ctx);
         virtual ~CPUController();
     };
 

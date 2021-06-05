@@ -16,13 +16,28 @@ public:
     enum LOG_TYPE {
         LOG_DEBUG, // 调试
         LOG_INFO, // 信息
-        LOG_WARNING, // 警告
+        LOG_WARN, // 警告
         LOG_ERROR, // 错误
         LOG_FATAL // 严重错误
     };
     
     Logger();
     virtual ~Logger();
+
+    virtual int debug(const char* format, ...);
+    virtual int debugw(const wchar_t* format, ...);
+
+    virtual int info(const char* format, ...);
+    virtual int infow(const wchar_t* format, ...);
+
+    virtual int warn(const char* format, ...);
+    virtual int warnw(const wchar_t* format, ...);
+
+    virtual int error(const char* format, ...);
+    virtual int errorw(const wchar_t* format, ...);
+    
+    virtual int fatal(const char* format, ...);
+    virtual int fatalw(const wchar_t* format, ...);
 
     void SetLogType(LOG_TYPE type) {
         log_type_ = type;
@@ -31,6 +46,8 @@ public:
     int GetLogType() const {
         return log_type_;
     }
+
+protected:
 
 private:
     // 错误日志保存类型

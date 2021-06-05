@@ -128,7 +128,8 @@
     <ClCompile Include="file\file.cpp" />
     <ClCompile Include="file\file_path.cpp" />
     <ClCompile Include="h2x_base.cpp" />
-    <ClInclude Include="h2x_error.h" />
+    <ClInclude Include="h2x_error_code.h" />
+    <ClInclude Include="h2x_observer_list.h" />
     <ClInclude Include="hardware\cpu.h" />
     <ClInclude Include="logger\h2x_logger.h" />
     <ClInclude Include="string\string_builder.h" />

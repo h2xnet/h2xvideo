@@ -2,7 +2,7 @@
 
 namespace h2x {
 
-IOController::IOController() {
+IOController::IOController(Application* app, Context* ctx) : Controller(app, ctx) {
 
 }
 

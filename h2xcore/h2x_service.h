@@ -5,6 +5,10 @@
 
 namespace h2x {
 
+class Application;
+class Context;
+class Logger;
+
 /*
 * ClassName: Service
 * Desc: 服务类，用于处理业务
@@ -15,6 +19,16 @@ class H2XCORE_EXPORT Service {
 public:
     Service();
     virtual ~Service();
+
+private:
+    // 应用对象
+    Application* app_;
+
+    // 请求上下文
+    Context* ctx_;
+
+    // 当前服务日志
+    Logger* log_;
 };
 
 } // end namespace h2x

@@ -2,7 +2,7 @@
 
 namespace h2x {
 
-CPUController::CPUController() {
+CPUController::CPUController(Application* app, Context* ctx) : Controller(app, ctx) {
 
 }
 

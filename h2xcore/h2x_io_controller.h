@@ -16,7 +16,7 @@ namespace h2x {
     */
     class H2XCORE_EXPORT IOController : public Controller {
     public:
-        IOController();
+        IOController(Application* app, Context* ctx);
         virtual ~IOController();
     };
 

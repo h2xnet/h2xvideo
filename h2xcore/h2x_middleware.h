@@ -5,6 +5,8 @@
 
 namespace h2x {
 
+    class Context;
+
 /*
 * ClassName: Middleware
 * Desc: 中间件类
@@ -13,8 +15,11 @@ namespace h2x {
 */
 class H2XCORE_EXPORT Middleware {
 public:
-    Middleware();
+    Middleware(Context* ctx);
     virtual ~Middleware();
+
+private:
+    Context* ctx_;
 };
 
 } // end namespace h2x
