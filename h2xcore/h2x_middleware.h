@@ -1,11 +1,12 @@
 #ifndef H2XCORE_H2X_MIDDLEWARE__H
 #define H2XCORE_H2X_MIDDLEWARE__H
 
+#include "h2xbase/task/task.h"
 #include "h2xcore/h2x_core_export.h"
 
 namespace h2x {
 
-    class Context;
+class Context;
 
 /*
 * ClassName: Middleware
@@ -19,7 +20,10 @@ public:
     virtual ~Middleware();
 
 private:
+    // 上下文对象
     Context* ctx_;
+
+    // next函数
 };
 
 } // end namespace h2x

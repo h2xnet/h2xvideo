@@ -138,6 +138,8 @@
     <ClInclude Include="sync\lock.h" />
     <ClInclude Include="sync\semaphore.h" />
     <ClInclude Include="sync\waitable_event.h" />
+    <ClInclude Include="task\callback.h" />
+    <ClInclude Include="task\task.h" />
     <ClInclude Include="time\time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

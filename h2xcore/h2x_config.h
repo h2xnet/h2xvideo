@@ -1,13 +1,15 @@
 #ifndef H2XCORE_H2X_CONFIG__H
 #define H2XCORE_H2X_CONFIG__H
 
+#include <string>
 #include "h2xcore/h2x_core_export.h"
 
 namespace h2x {
 
     /*
      * ClassName: Config
-     * Desc: 配置类
+     * Desc: 配置类，配置最终生成的是一个JSON字符串，会根据配置文件进行合并处理
+     * 输出到app_config.json，和agent_config.json文件中
      * Author: zfs
      * Date: 2021-05-16 17:17
      */
@@ -15,6 +17,11 @@ namespace h2x {
     public:
         Config();
         virtual ~Config();
+
+    public:
+        // 服务运行环境，生产环境为prod，单元测试环境为unittest，本地开发环境为local或空
+        // 不同的环境会对应config目录下不同的配置文件
+        std::string env_;
     };
 
 } // end namespace h2x
