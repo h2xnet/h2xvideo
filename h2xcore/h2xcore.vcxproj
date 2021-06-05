@@ -129,6 +129,7 @@
     <ClCompile Include="h2x_middleware.cpp" />
     <ClCompile Include="h2x_model.cpp" />
     <ClCompile Include="h2x_object.cpp" />
+    <ClCompile Include="h2x_option.cpp" />
     <ClCompile Include="h2x_plugin.cpp" />
     <ClCompile Include="h2x_request.cpp" />
     <ClCompile Include="h2x_response.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="h2x_schedule.cpp" />
     <ClCompile Include="h2x_sequelize.cpp" />
     <ClCompile Include="h2x_service.cpp" />
+    <ClCompile Include="h2x_session.cpp" />
     <ClCompile Include="h2x_subscription.cpp" />
     <ClCompile Include="h2x_view.cpp" />
     <ClInclude Include="h2x_application.h" />
@@ -155,6 +157,7 @@
     <ClInclude Include="h2x_middleware.h" />
     <ClInclude Include="h2x_model.h" />
     <ClInclude Include="h2x_object.h" />
+    <ClInclude Include="h2x_option.h" />
     <ClInclude Include="h2x_plugin.h" />
     <ClInclude Include="h2x_request.h" />
     <ClInclude Include="h2x_response.h" />
@@ -162,6 +165,7 @@
     <ClInclude Include="h2x_schedule.h" />
     <ClInclude Include="h2x_sequelize.h" />
     <ClInclude Include="h2x_service.h" />
+    <ClInclude Include="h2x_session.h" />
     <ClInclude Include="h2x_subscription.h" />
     <ClInclude Include="h2x_view.h" />
   </ItemGroup>

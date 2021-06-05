@@ -9,6 +9,8 @@ namespace h2x {
 class Cache;
 class Config;
 class Context;
+class Middleware;
+class Router;
 
 // 各种日志类型
 class AppLogger;
@@ -28,6 +30,14 @@ class H2XCORE_EXPORT Application {
 public:
     Application(const Config* cfg);
     virtual ~Application();
+
+    /*
+     * FunctionName: beforeStart
+     * Desc: 当应用服务启动前，会调用此函数回调通知，一个应用只会通知一次
+     * Author: zfs
+     * Date: 2021-06-05 09:38
+     */
+    virtual void beforeStart();
 
     /*
      * FunctionName: onStarted
@@ -95,6 +105,12 @@ private:
 
     // 缓存对象
     Cache* cache_;
+
+    // 中间件对象
+    Middleware* middlewares_;
+
+    // 路由对象
+    Router* router_;
 };
 
 } // end namespace h2x

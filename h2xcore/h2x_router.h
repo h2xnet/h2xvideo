@@ -5,17 +5,23 @@
 
 namespace h2x {
 
-    /*
-    * ClassName: Router
-    * Desc: 路由类
-    * Author: zfs
-    * Date: 2021-05-16 17:35
-    */
-    class H2XCORE_EXPORT Router {
-    public:
-        Router();
-        virtual ~Router();
-    };
+class Application;
+
+/*
+* ClassName: Router
+* Desc: 路由类
+* Author: zfs
+* Date: 2021-05-16 17:35
+*/
+class H2XCORE_EXPORT Router {
+public:
+    Router(Application* app);
+    virtual ~Router();
+
+private:
+    // 应用对象
+    Application* app_;
+};
 
 } // end namespace h2x
 

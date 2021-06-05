@@ -11,6 +11,7 @@ class Model;
 class Request;
 class Response;
 class Service;
+class Session; // 会话类
 
 /*
 * ClassName: Context
@@ -41,6 +42,9 @@ private:
 
     // 帮类对象
     Helper* helper_;
+
+    // 会话
+    Session* session_;
 };
 
 } // end namespace h2x

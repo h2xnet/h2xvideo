@@ -2,6 +2,8 @@
 
 #include "h2xcore/h2x_config.h"
 #include "h2xcore/h2x_context.h"
+#include "h2xcore/h2x_middleware.h"
+#include "h2xcore/h2x_router.h"
 
 #include <assert.h>
 
@@ -12,6 +14,10 @@ Application::Application(const Config* cfg) : cfg_((Config*)cfg) {
 }
 
 Application::~Application() {
+
+}
+
+void Application::beforeStart() {
 
 }
 

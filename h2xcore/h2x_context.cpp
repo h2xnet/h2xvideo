@@ -5,6 +5,7 @@
 #include "h2xcore/h2x_request.h"
 #include "h2xcore/h2x_response.h"
 #include "h2xcore/h2x_service.h"
+#include "h2xcore/h2x_session.h"
 
 namespace h2x {
 
