@@ -1,7 +1,7 @@
 #ifndef H2XCORE_H2X_LISTEN__H
 #define H2XCORE_H2X_LISTEN__H
 
-#include <string>
+#include "h2xcore/h2x_plugin.h"
 #include "h2xcore/h2x_core_export.h"
 
 namespace h2x {
@@ -14,32 +14,28 @@ class Option;
 * Author: zhaofushou
 * Date: 2021-06-03 22:51
 */
-class H2XCORE_EXPORT Listen {
+class H2XCORE_EXPORT Listen : public Plugin {
 public:
     Listen();
     virtual ~Listen();
-
-    /*
-     * FunctionName: getName
-     * Desc: 返回监听器名称
-     * Author: zfs
-     * Date: 2021-06-06 08:24
-     */
-    virtual std::string getName() = 0;
-
-    virtual bool init(const Option* opt) = 0;
-
-    virtual bool open() = 0;
-
-    virtual void close() = 0;
 
     virtual int send(const char* data, size_t size) = 0;
 
     virtual int recv(unsigned char* buffer, size_t bufferSize) = 0;
 
-    virtual void error(int errno, const std::string& errmsg) = 0;
+    /*
+     * FunctionName: isRunning
+     * Desc: 返回监听器运行状态，true代表正在运行,false代表已经停止运行
+     */
+    virtual bool isRunning() = 0;
 
-    virtual bool isOpen() = 0;
+    /*
+     * FunctionName: working
+     * Desc: 线程工程函数
+     * Author: zfs
+     * Date: 2021-06-06 18:06
+     */
+    virtual void working() = 0;
 
 };
 

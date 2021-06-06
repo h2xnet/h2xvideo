@@ -21,17 +21,9 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    /*// test
-    CrashWinHandle* h = new CrashWinHandle();
-    h2x::CrashWin cw(h);
-    cw.Regist(h2x::CrashWin::ExceptionLevel::error);
+    // 设置非EXE所在目录下的DLL目录，进行延时加载
+    //SetDllDirectory()
 
-    Sleep(2000);
-
-    //char* ptr = NULL;
-    //delete ptr;
-    strcpy(NULL, "adfadfg"); // 让程序崩溃
-    // end test*/
 
     return app.exec();
 }
