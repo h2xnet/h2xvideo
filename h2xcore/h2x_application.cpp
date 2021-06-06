@@ -2,6 +2,7 @@
 
 #include "h2xcore/h2x_config.h"
 #include "h2xcore/h2x_context.h"
+#include "h2xcore/h2x_listen_table.h"
 #include "h2xcore/h2x_middleware.h"
 #include "h2xcore/h2x_router.h"
 

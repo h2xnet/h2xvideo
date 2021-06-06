@@ -9,6 +9,25 @@
 
 #pragma comment(lib, "Dbghelp.lib")
 
+namespace {
+
+HANDLE OpenFileW(const h2x::PathWString& file) {
+    if (file.empty()) {
+        return NULL;
+    }
+
+    HANDLE h = CreateFileW(file.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    return h;
+}
+
+void CloseFile(HANDLE h) {
+    if (h != INVALID_HANDLE_VALUE) {
+        CloseHandle(h);
+    }
+}
+
+} // end namespace
+
 namespace h2x {
 
 #ifdef OS_WIN
@@ -39,7 +58,7 @@ LONG CALLBACK CrashWin::ExceptionHandler(PEXCEPTION_POINTERS exception) {
     wsprintf(szFullFileName, L"%s\\%s", szDumpPath, szFileName);
 
     // 创建dump文件
-    HANDLE hFile = h2x::File::OpenFileW(szFullFileName);
+    HANDLE hFile = OpenFileW(szFullFileName);
     if (hFile != INVALID_HANDLE_VALUE) {
 
         MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
@@ -49,7 +68,7 @@ LONG CALLBACK CrashWin::ExceptionHandler(PEXCEPTION_POINTERS exception) {
 
         MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
         
-        h2x::File::CloseFile(hFile);
+        CloseFile(hFile);
         hFile = NULL;
     }
 

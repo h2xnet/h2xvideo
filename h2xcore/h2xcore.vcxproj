@@ -123,6 +123,7 @@
     <ClCompile Include="h2x_helper.cpp" />
     <ClCompile Include="h2x_io_controller.cpp" />
     <ClCompile Include="h2x_listen.cpp" />
+    <ClCompile Include="h2x_listen_table.cpp" />
     <ClCompile Include="h2x_loader.cpp" />
     <ClCompile Include="h2x_message.cpp" />
     <ClCompile Include="h2x_message_service.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="h2x_helper.h" />
     <ClInclude Include="h2x_io_controller.h" />
     <ClInclude Include="h2x_listen.h" />
+    <ClInclude Include="h2x_listen_table.h" />
     <ClInclude Include="h2x_loader.h" />
     <ClInclude Include="h2x_message.h" />
     <ClInclude Include="h2x_message_service.h" />

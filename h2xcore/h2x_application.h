@@ -18,6 +18,8 @@ class AppCoreLogger;
 class ContextLogger;
 class ContextCoreLogger;
 class ControllerLogger;
+class Listen;
+class ListenTable;
 class ServiceLogger;
 
 /*
@@ -105,6 +107,9 @@ private:
 
     // 缓存对象
     Cache* cache_;
+
+    // 监听对象
+    ListenTable* listens_;
 
     // 中间件对象
     Middleware* middlewares_;

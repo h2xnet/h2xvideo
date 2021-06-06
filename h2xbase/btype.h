@@ -1,8 +1,19 @@
 #ifndef H2XBASE_BTYPE__H
 #define H2XBASE_BTYPE__H
 
+#include <string>
 #include <sys/types.h>
 #include "../build/build_config.h"
+
+#if defined(OS_POSIX)
+typedef std::string PathString;
+#elif defined(OS_WIN)
+typedef std::string PathString;
+typedef std::wstring PathWString;
+#endif
+
+typedef PathString::value_type PathChar;
+typedef PathWString::value_type PathWChar;
 
 #ifndef COMPILER_MSVC
 // stdint.h is part of C99 but MSVC doesn't have it.

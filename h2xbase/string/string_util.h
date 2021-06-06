@@ -4,63 +4,11 @@
 #include <string>
 #include <memory>
 
+#include "h2xbase/btype.h"
+#include "h2xbase/string/string_result.h"
 #include "h2xbase/h2x_base_export.h"
 
 namespace h2x {
-
-/*
-* ClassName: StringResult
-* Desc: 字符串处理结果类，用于保存字符串处理后结果字符串（通于用于字符串转换）
-* Author: zfs
-* Date: 2021-05-19 23:13
-*/
-class H2XBASE_EXPORT StringResult {
-public:
-    StringResult() : data_size_(0) {
-
-    }
-
-    virtual ~StringResult() {
-        if (data_ptr_.get()) {
-            data_ptr_.release();
-        }
-    }
-
-    /*
-     * FunctionName: SetData
-     * Desc: 设置字符串结果数据
-     * Author: zfs
-     * Date: 2021-05-19 23:18
-     * @data: 要设置的字符串指针
-     * @dataSize: 设置的字符串大小
-     */
-    void SetData(const char* data, size_t dataSize) {
-        data_size_ = 0;
-        if (data && dataSize) {
-            data_ptr_.reset(new char[dataSize + 1]{ '\0' });
-            if (data_ptr_.get()) {
-                memcpy(data_ptr_.get(), data, dataSize);
-                *(data_ptr_.get() + dataSize) = '\0';
-                data_size_ = dataSize;
-            }
-        }
-        else {
-            data_ptr_.reset(NULL);
-        }
-    }
-
-    const char* GetData() {
-        return data_ptr_.get();
-    }
-
-    size_t GetDataSize() const {
-        return data_size_;
-    }
-
-private:
-    std::unique_ptr<char[]> data_ptr_;
-    size_t data_size_;
-};
 
 /*
 * ClassName: StringUtil
@@ -72,6 +20,71 @@ class H2XBASE_EXPORT StringUtil {
 public:
     StringUtil();
     virtual ~StringUtil();
+
+    /*
+     * Function: StringPrintf
+     * Desc: 字符串格式化输出
+     * Author: zhaofushou
+     * Date: 2021-05-18 14:24
+     * @result: 返回格式化后的字符串
+     * @format: 格式字符串
+     * 返回值：成功返回true，失败返回false
+     */
+    static bool StringPrintf(StringResult<PathChar>& result, const char *format, ...);
+
+    /*
+     * Function: StringPrintfW
+     * Desc: 字符串格式化输出
+     * Author: zhaofushou
+     * Date: 2021-05-18 16:05
+     * @result: 返回格式化后的字符串
+     * @format: 格式字符串
+     * 返回值：成功返回true，失败返回false
+     */
+    static bool StringPrintfW(StringResult<PathWChar>& result, const wchar_t *format, ...);
+
+    /*
+     * FunctionName: GetNowDateString
+     * Desc: 获取当前日期字符串，比如2021-05-29
+     * Author: zhaofushou
+     * Date: 2021-05-29 14:12
+     * @result: 返回的日期字符串
+     * 返回值：成功返回true，失败返回false
+     */
+    static bool GetNowDateString(StringResult<PathChar>& result);
+
+    /*
+     * FunctionName: GetNowDateStringW
+     * Desc: 获取当前日期字符串，比如2021-05-29
+     * Author: zhaofushou
+     * Date: 2021-05-29 14:12
+     * @result: 返回的日期字符串
+     * 返回值：成功返回true，失败返回false
+     */
+    static bool GetNowDateStringW(StringResult<PathWChar>& result);
+
+    /*
+     * FunctionName: GetNowDatetimeString
+     * Desc: 获取当前日期时间字符串，比如2021-05-29 14:48:23.323
+     * Author: zhaofushou
+     * Date: 2021-05-29 14:12
+     * @result: 返回的日期字符串
+     * 返回值：成功返回true，失败返回false
+     */
+    static bool GetNowDatetimeString(StringResult<PathChar>& result);
+    static bool GetNowDatetimeStringW(StringResult<PathWChar>& result);
+
+    /*
+     * FunctionName: GetDateLoggerFileNameW
+     * Desc: 获取日期日志文件名称，扩展名为log
+     * Author: zhaofushou
+     * Date: 2021-05-29 14:55
+     * @prefix: 文件名前缀，返回的文件名会把前缀和文件名用下划线连接
+     * @result: 返回的日期字符串
+     * 返回值：成功返回true，失败返回false
+     */
+    static bool GetDateLoggerFileNameW(const PathWString& prefix, StringResult<PathWChar>& result);
+
 };
 
 };

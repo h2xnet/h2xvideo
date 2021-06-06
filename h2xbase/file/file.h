@@ -23,31 +23,43 @@ public:
 	File();
 	virtual ~File();
 
-#ifdef OS_WIN
-    /*
-     * FunctionName: OpenFileW
-     * Desc: 打开文件，如果存在则追加模式打开，不存在则创建
-     * Author: zfs
-     * Date: 2021-05-16 10:20
-     */
-    static HANDLE OpenFileW(const h2x::PathWString& file);
+    bool Open(const PathWChar* fileName, const PathWChar* mode = L"a+");
+
+    void Close();
 
     /*
-     * FunctionName: WriteFileData
-     * Desc: 写文件数据
-     * Author: zfs
-     * Date: 2021-05-16 10:30
+     * FunctionName: Read
+     * Desc: 读取文件内容
+     * Author: zhaofushou
+     * Date: 2021-05-29 16:21
+     * @buff: 存放读取数据的缓冲区
+     * @buffSize: 缓冲区大小
+     * @readDataSize: 实际读取的数据长度
+     * 返回值：读出的字节数，如果小于0，则代表错误
      */
-    static int WriteFileData(const HANDLE h, const char* data, size_t dataSize);
+    int Read(byte* buff, size_t buffSize, int& readDataSize);
 
-    /*
-     * FunctionName: CloseFile
-     * Desc: 关闭文件
-     * Author: zfs
-     * Date: 2021-05-16 10:31
-     */
-    static void CloseFile(HANDLE h);
-#endif // OS_WIN
+    //
+    // Write : 字入文件内容
+    //
+    int Write(const char* data, size_t dataSize);
+
+    //
+    // Print : 格式化写入文件内容
+    //
+    int Print(const char* format, ...);
+
+    int Print(const char* format, const va_list& ap);
+
+    //
+    // PrintW : 格式化写入文件内容（unicode模式，主要用于包含中文内容输出）
+    //
+    int PrintW(const wchar_t* format, ...);
+
+    int PrintW(const wchar_t* format, const va_list& ap);
+
+private:
+    FILE* ff_;
 
 };
 
