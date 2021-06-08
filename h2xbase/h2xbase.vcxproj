@@ -116,6 +116,10 @@
     <ClCompile Include="sync\lock_win.cpp" />
     <ClCompile Include="sync\semaphore_win.cpp" />
     <ClCompile Include="sync\waitable_event_win.cpp" />
+    <ClCompile Include="task\default_message_pump.cpp" />
+    <ClCompile Include="task\message_loop.cpp" />
+    <ClCompile Include="task\message_loop_proxy.cpp" />
+    <ClCompile Include="task\message_pump.cpp" />
     <ClCompile Include="time\time.cpp" />
     <ClCompile Include="time\time_win.cpp" />
     <ClInclude Include="btype.h" />
@@ -140,6 +144,10 @@
     <ClInclude Include="sync\semaphore.h" />
     <ClInclude Include="sync\waitable_event.h" />
     <ClInclude Include="task\callback.h" />
+    <ClInclude Include="task\default_message_pump.h" />
+    <ClInclude Include="task\message_loop.h" />
+    <ClInclude Include="task\message_loop_proxy.h" />
+    <ClInclude Include="task\message_pump.h" />
     <ClInclude Include="task\task.h" />
     <ClInclude Include="time\time.h" />
   </ItemGroup>
