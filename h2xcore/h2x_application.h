@@ -30,8 +30,23 @@ class ServiceLogger;
  */
 class H2XCORE_EXPORT Application {
 public:
-    Application(const Config* cfg);
+    /*
+     * 构造函数说明
+     * @argc：应用启动参数个数
+     * @argv: 应用启动参数列表
+     * @cfg:应用配置对象，如果为空，则创建默认对象，不为空则用传入的对象
+     */
+    Application(int argc, char *argv[], const Config* cfg);
     virtual ~Application();
+
+    /*
+     * FunctionName: exec
+     * Desc: 开始运行应用
+     * Author: zfs
+     * Date: 2021-06-12 16:00
+     * 返回值：成功返回true,失败返回false
+     */
+    virtual bool exec(); 
 
     /*
      * FunctionName: beforeStart
@@ -99,6 +114,10 @@ public:
 	}
 
 private:
+    // 应用启动参数
+    int argc_;
+    char** argv_;
+
 	// 应用名称
 	std::string name_;
 

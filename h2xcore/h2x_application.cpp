@@ -10,12 +10,25 @@
 
 namespace h2x {
 
-Application::Application(const Config* cfg) : cfg_((Config*)cfg) {
-	assert(cfg_);
+Application::Application(int argc, char *argv[], const Config* cfg) : argc_(argc), argv_(argv), cfg_((Config*)cfg) {
+	if (!cfg_) {
+        cfg_ = new Config();
+    }
+    assert(cfg_);
 }
 
 Application::~Application() {
 
+}
+bool Application::exec() {
+
+    this->beforeStart();
+
+    // ¼ÓÔØÅäÖÃÎÄ¼þ
+
+    this->onStarted();
+
+    return true;
 }
 
 void Application::beforeStart() {
