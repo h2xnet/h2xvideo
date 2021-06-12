@@ -3,17 +3,23 @@
 #include "h2xbase/task/default_message_pump.h"
 #include "h2xbase/task/message_loop_proxy.h"
 
+#include <assert.h>
+#include "h2xbase/memory/lazy_instance.h"
+#include "h2xbase/thread/thread_local.h"
+
 namespace h2x {
+
+LazyInstance<ThreadLocalPointer<MessageLoop> > g_lazy_ptr;
 
 MessageLoop::MessageLoop() : type_(kDefaultMessageLoop), state_(NULL), nestable_tasks_allowed_(true),
 next_delayed_task_sequence_num_(0) {
     // 一个线程内不能存在两个或以上MessageLoop
-    //assert(g_lazy_ptr.Pointer()->Get() == NULL);
+    assert(g_lazy_ptr.pointer()->get() == NULL);
     // 默认消息循环
     if (type_ == kDefaultMessageLoop) {
         pump_.reset(new DefaultMessagePump);
     }
-    //g_lazy_ptr.Pointer()->Set(this);
+    g_lazy_ptr.pointer()->set(this);
 
     message_loop_proxy_.reset(new MessageLoopProxy, &MessageLoopProxyTraits::destruct);
     message_loop_proxy_->target_message_loop_ = this;
@@ -40,25 +46,29 @@ MessageLoop::~MessageLoop() {
     message_loop_proxy_->willDestroyCurrentMessageLoop();
     message_loop_proxy_ = nullptr;
 
-    //g_lazy_ptr.Pointer()->Set(NULL);
+    g_lazy_ptr.pointer()->set(NULL);
 }
 
+MessageLoop* MessageLoop::current()
+{
+    return g_lazy_ptr.pointer()->get();
+}
 
 void MessageLoop::run() {
-    //assert(this == current());
+    assert(this == current());
     AutoRunState state(this);
     runInternal();
 }
 
 void MessageLoop::runAllPending() {
-    //assert(this == current());
+    assert(this == current());
     AutoRunState state(this);
     state_->quit_received = true;  // Means run until we would otherwise block.
     runInternal();
 }
 
 void MessageLoop::runInternal() {
-    //assert(this == current());
+    assert(this == current());
 
     pump_->run(this);
 }
@@ -95,38 +105,33 @@ void MessageLoop::quitNow() {
     }
 }
 
-void MessageLoop::postTask(const StdClosure &task)
-{
+void MessageLoop::postTask(const StdClosure &task) {
     PendingTask pending_task(task);
     addToIncomingQueue(pending_task);
 }
 
-void MessageLoop::postDelayedTask(const StdClosure &task, TimeDelta delay)
-{
+void MessageLoop::postDelayedTask(const StdClosure &task, TimeDelta delay) {
     PendingTask pending_task(task,
         TimeTicks::Now() + delay,
         true);
     addToIncomingQueue(pending_task);
 }
 
-void MessageLoop::postNonNestableTask(const StdClosure &task)
-{
+void MessageLoop::postNonNestableTask(const StdClosure &task) {
     PendingTask pending_task(task,
         TimeTicks(),
         false);
     addToIncomingQueue(pending_task);
 }
 
-void MessageLoop::postNonNestableDelayedTask(const StdClosure &task, TimeDelta delay)
-{
+void MessageLoop::postNonNestableDelayedTask(const StdClosure &task, TimeDelta delay) {
     PendingTask pending_task(task,
         TimeTicks::Now() + delay,
         false);
     addToIncomingQueue(pending_task);
 }
 
-TimeTicks MessageLoop::evalDelayedRuntime(int64_t delay_ms)
-{
+TimeTicks MessageLoop::evalDelayedRuntime(int64_t delay_ms) {
     TimeTicks delayed_run_time;
     if (delay_ms > 0)
         delayed_run_time = TimeTicks::Now() + TimeDelta::FromMilliseconds(delay_ms);
@@ -137,7 +142,7 @@ void MessageLoop::addToIncomingQueue(const PendingTask &task) {
     // 本方法可能会在另一个线程中被执行，所以必须线程安全
     std::shared_ptr<MessagePump> pump;
     {
-        //NAutoLock lock(&incoming_queue_lock_);
+        std::unique_lock<std::mutex> lock(incoming_queue_lock_);
         bool was_empty = incoming_queue_.empty();
         incoming_queue_.push(task);
         if (!was_empty) {
@@ -153,21 +158,19 @@ void MessageLoop::addToIncomingQueue(const PendingTask &task) {
     pump->scheduleWork();
 }
 
-void MessageLoop::addToDelayedWorkQueue(const PendingTask &task)
-{
+void MessageLoop::addToDelayedWorkQueue(const PendingTask &task) {
     PendingTask new_task(task);
     new_task.sequence_num = next_delayed_task_sequence_num_++;
     delayed_work_queue_.push(new_task);
 }
 
-void MessageLoop::reloadWorkQueue()
-{
+void MessageLoop::reloadWorkQueue() {
     if (!work_queue_.empty()) {
         return;
     }
 
     {
-        //NAutoLock lock(&incoming_queue_lock_);
+        std::unique_lock<std::mutex> lock(incoming_queue_lock_);
         if (incoming_queue_.empty())
             return;
         // 常数时间交换内存
@@ -315,22 +318,22 @@ void MessageLoop::setNestableTasksAllowed(bool allowed) {
 }
 
 void MessageLoop::addDestructionObserver(DestructionObserver *observer) {
-    //assert(this == current());
+    assert(this == current());
     destruction_observers_.AddObserver(observer);
 }
 
 void MessageLoop::removeDestructionObserver(DestructionObserver *observer) {
-    //assert(this == current());
+    assert(this == current());
     destruction_observers_.RemoveObserver(observer);
 }
 
 void MessageLoop::addTaskObserver(TaskObserver *observer) {
-    //assert(this == current());
+    assert(this == current());
     task_observers_.AddObserver(observer);
 }
 
 void MessageLoop::removeTaskObserver(TaskObserver *observer) {
-    //assert(this == current());
+    assert(this == current());
     task_observers_.RemoveObserver(observer);
 }
 

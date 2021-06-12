@@ -120,8 +120,13 @@
     <ClCompile Include="task\message_loop.cpp" />
     <ClCompile Include="task\message_loop_proxy.cpp" />
     <ClCompile Include="task\message_pump.cpp" />
+    <ClCompile Include="thread\framework_thread.cpp" />
+    <ClCompile Include="thread\thread_local_win.cpp" />
+    <ClCompile Include="thread\thread_manager.cpp" />
+    <ClCompile Include="thread\thread_win.cpp" />
     <ClCompile Include="time\time.cpp" />
     <ClCompile Include="time\time_win.cpp" />
+    <ClCompile Include="util\at_exit.cpp" />
     <ClInclude Include="btype.h" />
     <ClInclude Include="crash\crash_handler.h" />
     <ClInclude Include="crash\crash_win.h" />
@@ -133,10 +138,13 @@
     <ClCompile Include="file\file_path.cpp" />
     <ClCompile Include="h2x_base.cpp" />
     <ClInclude Include="h2x_error_code.h" />
+    <ClInclude Include="h2x_macros.h" />
     <ClInclude Include="h2x_map_table.h" />
     <ClInclude Include="h2x_observer_list.h" />
     <ClInclude Include="hardware\cpu.h" />
     <ClInclude Include="logger\h2x_logger.h" />
+    <ClInclude Include="memory\lazy_instance.h" />
+    <ClInclude Include="memory\singleton.h" />
     <ClInclude Include="string\string_builder.h" />
     <ClInclude Include="string\string_result.h" />
     <ClInclude Include="string\string_util.h" />
@@ -149,7 +157,14 @@
     <ClInclude Include="task\message_loop_proxy.h" />
     <ClInclude Include="task\message_pump.h" />
     <ClInclude Include="task\task.h" />
+    <ClInclude Include="third_party\chrome\atomicops.h" />
+    <ClInclude Include="third_party\chrome\atomicops_internals_x86_msvc.h" />
+    <ClInclude Include="thread\framework_thread.h" />
+    <ClInclude Include="thread\thread.h" />
+    <ClInclude Include="thread\thread_local.h" />
+    <ClInclude Include="thread\thread_manager.h" />
     <ClInclude Include="time\time.h" />
+    <ClInclude Include="util\at_exit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

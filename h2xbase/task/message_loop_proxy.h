@@ -51,7 +51,7 @@ public:
         return true;
     }
 
-    virtual bool belongsToCurrentThread() const;
+    virtual bool belongsToCurrentThread();
 
 private:
     // Allow the messageLoop to create a MessageLoopProxy.
@@ -156,8 +156,7 @@ private:
 
 
 template<>
-void MessageLoopProxy::PostTaskAndReplyRelay<void(), void()>::run()
-{
+void MessageLoopProxy::PostTaskAndReplyRelay<void(), void()>::run() {
     std_task_();
     origin_loop_->postTask(
         std::bind(&PostTaskAndReplyRelay::runReplyAndSelfDestruct, this));

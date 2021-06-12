@@ -36,12 +36,15 @@ public:
     enum Type
     {
         kDefaultMessageLoop,
-        kUIMessageLoop, // 主要用于界面渲染
-        kIOMessageLoop // 主要用于输入输出，例如文件读写，网络请求应答
+        kUIMessageLoop, // 主要用于界面渲染（通常不业务处理，只提供数据展示）
+        kIOMessageLoop, // 主要用于输入输出，例如文件读写，网络请求应答
+        kCustomMessageLoop // 自定义消息循环
     };
 
     explicit MessageLoop();
     virtual ~MessageLoop();
+
+    static MessageLoop* current();
 
 #if defined(OS_WIN)
     // 转换成对应派生类型的MessageLoop指针
@@ -121,11 +124,11 @@ public:
     class H2XBASE_EXPORT TaskObserver
     {
     public:
-        virtual void preProcessTask() = 0;
-        virtual void postProcessTask() = 0;
+        virtual void preProcessTask() {}
+        virtual void postProcessTask() {}
 
     protected:
-        virtual ~TaskObserver();
+        virtual ~TaskObserver() {}
     };
 
     void addTaskObserver(TaskObserver* observer);

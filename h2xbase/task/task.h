@@ -8,7 +8,7 @@
 
 namespace h2x {
 
-struct H2XBASE_EXPORT PendingTask {
+/*struct H2XBASE_EXPORT PendingTask {
     PendingTask(const StdClosure& task) : std_task(task), sequence_num(0){}
 
     PendingTask(const StdClosure &task,
@@ -43,7 +43,7 @@ struct H2XBASE_EXPORT PendingTask {
 
 private:
     StdClosure std_task;
-};
+};*/
 
 } // end namespace h2x
 

@@ -24,33 +24,30 @@ bool MessageLoopProxy::postNonNestableDelayedTask(
     return postTaskHelper(task, delay, false);
 }
 
-bool MessageLoopProxy::belongsToCurrentThread() const {
-    //std::unique_lock<const std::mutex> lock(message_loop_lock_);
-    //return (target_message_loop_ &&
-    //    (MessageLoop::current() == target_message_loop_));
-
-    return false;
+bool MessageLoopProxy::belongsToCurrentThread() {
+    std::unique_lock<std::mutex> lock(message_loop_lock_);
+    return (target_message_loop_ &&
+        (MessageLoop::current() == target_message_loop_));
 }
 
 
 // MessageLoop::DestructionObserver implementation
 void MessageLoopProxy::willDestroyCurrentMessageLoop() {
-    //NAutoLock lock(&message_loop_lock_);
-    //std::unique_lock<std::mutex> lock(message_loop_lock_);
+    std::unique_lock<std::mutex> lock(message_loop_lock_);
     target_message_loop_ = nullptr;
 }
 
 void MessageLoopProxy::onDestruct()
 {
     bool delete_later = false; {
-        //std::unique_lock<std::mutex> lock(message_loop_lock_);
-        /*if (target_message_loop_ &&
+        std::unique_lock<std::mutex> lock(message_loop_lock_);
+        if (target_message_loop_ &&
             (MessageLoop::current() != target_message_loop_))
         {
             target_message_loop_->postNonNestableTask(
                 std::bind(&MessageLoopProxy::DeleteSelf, this));
             delete_later = true;
-        }*/
+        }
     }
     if (!delete_later)
         delete this;
@@ -61,14 +58,14 @@ void MessageLoopProxy::DeleteSelf() const {
 }
 
 MessageLoopProxy::MessageLoopProxy()
-   /* : target_message_loop_(MessageLoop::current())*/ {
+    : target_message_loop_(MessageLoop::current()) {
 
 }
 
 bool MessageLoopProxy::postTaskHelper(
     const StdClosure& task, TimeDelta delay, bool nestable) {
-    //std::unique_lock<std::mutex> lock(message_loop_lock_);
-    /*if (target_message_loop_) {
+    std::unique_lock<std::mutex> lock(message_loop_lock_);
+    if (target_message_loop_) {
         if (nestable) {
             if (delay == TimeDelta())
                 target_message_loop_->postTask(task);
@@ -82,16 +79,15 @@ bool MessageLoopProxy::postTaskHelper(
                 target_message_loop_->postNonNestableDelayedTask(task, delay);
         }
         return true;
-    }*/
+    }
     return false;
 }
 
 std::shared_ptr<MessageLoopProxy> MessageLoopProxy::current() {
-    /*MessageLoop* cur_loop = MessageLoop::current();
+    MessageLoop* cur_loop = MessageLoop::current();
     if (!cur_loop)
         return nullptr;
-    return cur_loop->message_loop_proxy();*/
-    return nullptr;
+    return cur_loop->message_loop_proxy();
 }
 
 void MessageLoopProxyTraits::destruct(const MessageLoopProxy* proxy) {
