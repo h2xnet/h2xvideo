@@ -1,6 +1,6 @@
 #include "h2xvideo/app.h"
 
-#include "h2xvideo/main_view.h"
+#include "h2xvideo/MainView.h"
 
 App::App() : Application(0, NULL, NULL) {
 
@@ -15,7 +15,7 @@ App::~App() {
 }
 
 void App::registViews() {
-    qmlRegisterType<MainView>("component.h2xvideo.mainviewhandler", 1, 0, "MainViewHandler");
+    qmlRegisterType<MainView>("component.h2xvideo.mainview", 1, 0, "MainView");
 }
 
 void App::beforeStart() {

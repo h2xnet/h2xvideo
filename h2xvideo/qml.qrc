@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>HomeView.qml</file>
+        <file>LoginView.qml</file>
+        <file>qmluilib/router/RouterStackView.qml</file>
     </qresource>
 </RCC>

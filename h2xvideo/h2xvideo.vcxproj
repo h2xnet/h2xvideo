@@ -113,11 +113,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="app_cache.cpp" />
     <ClCompile Include="app_config.cpp" />
+    <ClCompile Include="cache\router_cache.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="main_view.cpp" />
+    <ClCompile Include="MainView.cpp" />
+    <None Include="HomeView.qml" />
+    <None Include="LoginView.qml" />
+    <None Include="qmluilib\router\RouterStackView.qml" />
     <QtRcc Include="qml.qrc" />
     <None Include="main.qml" />
+    <QtRcc Include="Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\h2xbase\h2xbase.vcxproj">
@@ -129,8 +135,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h" />
+    <ClInclude Include="app_cache.h" />
     <ClInclude Include="app_config.h" />
-    <QtMoc Include="main_view.h" />
+    <ClInclude Include="cache\router_cache.h" />
+    <QtMoc Include="MainView.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="h2xvideo.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

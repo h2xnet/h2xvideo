@@ -1,4 +1,4 @@
-#include "h2xvideo/main_view.h"
+#include "h2xvideo/MainView.h"
 
 MainView* MainView::qmlAttachedProperties(QObject *object) {
     static MainView* inst = NULL;
@@ -14,4 +14,9 @@ MainView::MainView(QObject* parent) : QObject(parent) {
 
 MainView::~MainView() {
 
+}
+
+void MainView::routerPageSet(QString pageName, QString pageParam) {
+    // 通知页面改变
+    emit routerPageChanged(pageName, pageParam);
 }
