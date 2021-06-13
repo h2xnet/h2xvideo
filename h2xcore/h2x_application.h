@@ -113,7 +113,7 @@ public:
 		return cfg_;
 	}
 
-private:
+protected:
     // 应用启动参数
     int argc_;
     char** argv_;

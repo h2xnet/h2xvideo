@@ -1,8 +1,20 @@
-﻿import QtQuick 2.3
+﻿import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
 
-import component.h2xvideo.mainview 1.0
+import module.h2xvideo.mainViewHandler 1.0
+
 
 Rectangle {
+    id: loginView
+    
+    property var pageName : ""
+    property var pageParam : ""
+
+    MainViewHandler {
+        id: mainViewHandler
+    }
+
     width: 200
     height: 100
     color: "red"
@@ -12,10 +24,13 @@ Rectangle {
         text: "Hello, World!, login!"
     }
 
-     MouseArea {
+    MouseArea {
         anchors.fill: parent
         onClicked: {
-            MainView.routerPageSet("login", "");
+            console.log("LoginView.qml onClicked.");
+            mainViewHandler.routerPageSet("LoginView", "home", "");
         }
     }
+    
+
 }

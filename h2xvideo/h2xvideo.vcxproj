@@ -117,7 +117,7 @@
     <ClCompile Include="app_config.cpp" />
     <ClCompile Include="cache\router_cache.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainView.cpp" />
+    <ClCompile Include="main_view_handler.cpp" />
     <None Include="HomeView.qml" />
     <None Include="LoginView.qml" />
     <None Include="qmluilib\router\RouterStackView.qml" />
@@ -138,7 +138,7 @@
     <ClInclude Include="app_cache.h" />
     <ClInclude Include="app_config.h" />
     <ClInclude Include="cache\router_cache.h" />
-    <QtMoc Include="MainView.h" />
+    <QtMoc Include="main_view_handler.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

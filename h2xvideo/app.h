@@ -1,10 +1,12 @@
 #ifndef H2XVIDEO_APP__H
 #define H2XVIDEO_APP__H
 
+#include "h2xbase/logger/h2x_logger.h"
 #include "h2xcore/h2x_application.h"
 
 namespace h2x {
-
+    
+class Logger;
 class Config;
 class View;
 
@@ -22,6 +24,8 @@ public:
     App(int argc, char *argv[], const h2x::Config* cfg);
 
     virtual ~App();
+
+    void operator=(const App& other);
 
     /*
      * FunctionName: registViews
@@ -44,6 +48,13 @@ public:
      * Date: 2021-06-12 15:41
      */
     virtual void onStarted() override;
+
+    h2x::Logger& getLogger() {
+        return logger_;
+    }
+
+private:
+    h2x::Logger logger_;
 };
 
 extern App& getApp();

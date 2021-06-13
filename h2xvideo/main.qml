@@ -1,7 +1,8 @@
-import QtQuick 2.9
-import QtQuick.Window 2.2
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
 
-import component.h2xvideo.mainview 1.0
+import module.h2xvideo.mainViewHandler 1.0
 
 import "qrc:/qmluilib/router"
 
@@ -17,8 +18,12 @@ Window {
     //
     // RouterStackView : 路由
     // 
-    RouterStackView {
+    //RouterStackView {
+    //    id: routerStackView
+    //}
+    StackView {
         id: routerStackView
+        anchors.fill: parent
     }
 
     //
@@ -26,7 +31,9 @@ Window {
     //
     HomeView {
         id: homeView
-        name: "home"
+        visible: false
+        pageName: "home"
+        pageParam: ""
     }
 
     //
@@ -34,36 +41,50 @@ Window {
     //
     LoginView {
         id: loginView
-        name: "login"
+        visible: false
+        pageName: "login"
+        pageParam: ""
     }
 
     Component.onCompleted: {
-        routerStackView.push(loginView)
+        console.log("main.qml Component.onCompleted.")
+        // 加载主页
+        mainViewHandler.routerPageSet("main", "home", "");
     }
 
-    MouseArea {
+    /*MouseArea {
         anchors.fill: parent
         onClicked: {
             mainWin.close()
         }
-    }
+    }*/
 
     //
     // onRouterPageChanged : 路由页面改变
     //
-    MainView.onRouterPageChanged : function(pageName, pageParam) {
-        let paramObj = {
-            pageName: pageName,
-            pageParam: pageParam
-        }
-        console.log("main.qml MainViewHandler.onRouterPageChanged params: " + JSON.stringify(paramObj));
 
-        if (pageName === "home") {
-            routerStackView.push(loginView)
-        }
-        else if (pageName === "login") {
-            routerStackView.push(homeView)
-        }
+    MainViewHandler {
+        id: mainViewHandler
 
+        // 信号
+        onRouterPageChanged : function(sender, pageName, pageParam) {
+            console.log("main.qml MainViewHandler.onRouterPageChanged.");
+            let paramObj = {
+                sender: sender,
+                pageName: pageName,
+                pageParam: pageParam
+            }
+            console.log("main.qml MainViewHandler.onRouterPageChanged params: " + JSON.stringify(paramObj));
+
+            if (pageName === "home") {
+                routerStackView.push(loginView)
+            }
+            else if (pageName === "login") {
+                routerStackView.push(homeView)
+            }
+
+        }
     }
+    
+
 }
